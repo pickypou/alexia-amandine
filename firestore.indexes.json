@@ -1,0 +1,15 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "couture",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Field",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

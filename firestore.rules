@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Règle pour la collection Users
+    match /Users/{userId} {
+      // Autoriser lecture/écriture uniquement si c'est le propriétaire
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Règle pour les collections 
+    match /couture/{docId} {
+      allow read: if true; // Tout le monde peut lire (à adapter)
+      allow write: if request.auth != null; // Seuls les utilisateurs connectés peuvent écrire
+    }
+    
+     match /tricot/{docId} {
+      allow read: if true; // Tout le monde peut lire (à adapter)
+      allow write: if request.auth != null; // Seuls les utilisateurs connectés peuvent écrire
+    }
+    
+    // Autres collections : interdiction par défaut (règle par défaut = rien)
+  }
+}
