@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'Autography';
+  src: url('../assets/fonts/Autography.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Amable';
+  src: url('../assets/fonts/Amable.ttf') format('truetype');
+}
+
+:root {
+  --color-primary: #B7B1F2;
+  --color-on-primary: #FDB7EA;
+  --color-secondary: #FFDCCC;
+  --color-on-secondary: #FBF3B9;
+  --color-surface: #000000;
+  --color-on-surface: #FBF3B9;
+  --background-color: #FAF6F1;
+
+  --font-title: 'Autography';
+  --font-text: 'Amable';
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1.1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 3.5rem;
+}
+
+h1,
+h2 {
+  text-align: center;
+    font-size: var(--text-xl);
+    font-weight: 100;
+    color: var( --color-primary);
+    font-family: var(--font-title);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+  font-family: var(--font-text);
+  font-size: var(--text-md);
+  color: var(--color-surface);
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  font-family: var(--font-text);
+  color: var(--color-surface);
+}

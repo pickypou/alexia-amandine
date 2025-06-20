@@ -1,0 +1,22 @@
+.btn {
+  padding: 0.6rem 1.4rem;
+  font-size: var(--text-md);
+  font-weight: 500;
+  border: 2px solid #FDB7EA;
+  border-radius: 50px; /* très grand pour arrondir totalement */
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-block;
+ background-color: var(--color-primary);
+ margin-right: 25px;
+ margin-left: 25px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    height: 60vh; /* Centrer verticalement */
+}
+
+

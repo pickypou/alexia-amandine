@@ -10,11 +10,15 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
+     alias: {
       '@components': path.resolve(__dirname, 'src/shared/components'),
       '@pages': path.resolve(__dirname, 'src/features/site/pages'),
+      '@admin': path.resolve(__dirname, 'src/features/admin'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@assets': path.resolve(__dirname, 'src/assets'),
+      '@lib': path.resolve(__dirname, 'src/lib'),
+      '@layouts': path.resolve(__dirname, 'src/layouts'),
+      '@auth': path.resolve(__dirname, 'src/features/auth/pages'),
     },
   },
 });

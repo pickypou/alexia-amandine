@@ -1,0 +1,27 @@
+.footer {
+  background-color: var(--color-primary);
+  margin-top: 3rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  
+  padding: 0.5rem ;
+  text-align: center;
+}
+.footer-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+ 
+}
+a {
+  color: var(--color-surface);
+  text-decoration: none;
+ 
+}
+
+.img-footer {
+  width: 2rem;
+  
+}
+

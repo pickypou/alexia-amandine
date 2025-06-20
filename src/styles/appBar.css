@@ -1,0 +1,15 @@
+/* Structure de base */
+.header {
+  background-color: var(--color-primary);
+  padding: 1rem; 
+  width: 100%;
+}
+
+.link {
+  color: var(--color-surface);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  margin-right: 1rem;
+}
+  
+
