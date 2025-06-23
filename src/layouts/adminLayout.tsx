@@ -1,15 +1,16 @@
 // src/layouts/AdminLayout.tsx
+import AppBarAdmin from '@components/AppBbarAdmin';
+import Footer from '@components/Footer';
 import { Outlet } from 'react-router-dom';
 
 const AdminLayout = () => {
   return (
     <div>
-      <header style={{ background: '#222', color: '#fff', padding: '1rem' }}>
-        <h1>Admin Panel</h1>
-      </header>
+     <AppBarAdmin />
       <main>
         <Outlet />
       </main>
+     <Footer />
     </div>
   );
 };

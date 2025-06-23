@@ -19,6 +19,12 @@ export default defineConfig({
       '@lib': path.resolve(__dirname, 'src/lib'),
       '@layouts': path.resolve(__dirname, 'src/layouts'),
       '@auth': path.resolve(__dirname, 'src/features/auth/pages'),
+      '@entities': path.resolve(__dirname, 'src/domain/entities'),
+      '@repositories': path.resolve(__dirname, 'src/core/repositories'),
+      '@usecases': path.resolve(__dirname, 'src/domain/usecases'),
+      '@interactor': path.resolve(__dirname, 'src/domain/interactor'),
+      '@data': path.resolve(__dirname, 'src/data/repositories'),
+
     },
   },
 });

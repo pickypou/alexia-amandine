@@ -1,0 +1,29 @@
+.custom-text-field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: var(--text-md);
+    color: var(--color-primary);
+    align-items: center;
+;
+}
+
+.custom-text-field input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: var(--text-md);
+  border: 2px solid #FDB7EA;
+  border-radius: 50px;
+  margin-bottom: 3rem;
+  background-color: transparent;
+}
+
+.custom-text-field input:focus {
+  outline: none;
+  border-color:var(--color-primary);
+}
+
+.custom-text-field .error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}

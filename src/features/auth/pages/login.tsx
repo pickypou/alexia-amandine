@@ -1,43 +1,58 @@
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@lib/firebase";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { AuthInteractor } from '@interactor/AuthInteractor';
+import { AuthRepositoryImpl } from '@data/auth/AuthRepositoryImpl';
+import CustomTextField from '@components/CustomTextField';
+import Button from '@components/Button';
+import styles from './login.module.css';
+import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const authRepository = new AuthRepositoryImpl();
+const authInteractor = new AuthInteractor(authRepository);
+
+const Login: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/admin");
+      const user = await authInteractor.login(email, password);
+      console.log('Utilisateur connecté:', user);
+      navigate('/admin/account'); // Redirige vers la page du compte après connexion
     } catch (err) {
-      if (err instanceof Error) {
-        alert("Erreur : " + err.message);
-      } else {
-        alert("Une erreur inconnue est survenue.");
-      }
+      console.error(err);
+      setError('Erreur de connexion, veuillez vérifier vos identifiants.');
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Connexion</h2>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      /><br />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      /><br />
-      <button type="submit">Se connecter</button>
-    </form>
+    <div className={styles.container}>
+      <div>
+        <h2>Connexion</h2>
+        <form onSubmit={handleLogin}>
+          <CustomTextField
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            required
+          />
+          <CustomTextField
+            label="Mot de passe"
+            type="password"
+            value={password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            required
+          />
+          <Button type="submit" label="Se connecter" />
+          <Button type="default" label="Retour" redirectTo="/admin" />
+          {error && <p className={styles.error}>{error}</p>}
+        </form>
+      </div>
+    </div>
   );
-}
+};
+
+export default Login;

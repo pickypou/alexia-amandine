@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center;     /* centre verticalement */
+  height: 100vh;
+
+}
+
+/* Pour que le contenu soit en colonne et limité en largeur */
+.container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 320px; /* largeur max souhaitée */
+}
