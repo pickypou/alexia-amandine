@@ -8,11 +8,28 @@ interface CustomTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string; 
 }
 
-const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, error, className, ...inputProps }) => {
+const CustomTextField: React.FC<CustomTextFieldProps> = ({
+  label,
+  error,
+  className,
+  ...inputProps
+}) => {
+  const isFileInput = inputProps.type === "file";
+  const inputId = inputProps.name || "file-" + Math.random().toString(36).slice(2, 8);
+
   return (
     <div className={`custom-text-field ${className ?? ""}`}>
-      {label && <label>{label}</label>}
-      <input {...inputProps} />
+      {label && <label htmlFor={inputId}>{label}</label>}
+
+      {isFileInput ? (
+        <>
+          <label htmlFor={inputId} className="custom-file-label">📁 Choisir un fichier</label>
+          <input id={inputId} {...inputProps} className="hidden-file-input" />
+        </>
+      ) : (
+        <input id={inputId} {...inputProps} />
+      )}
+
       {error && <p className="error-message">{error}</p>}
     </div>
   );

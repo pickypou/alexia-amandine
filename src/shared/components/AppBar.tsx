@@ -11,10 +11,10 @@ export default function AppBar() {
         <div className="dropdown">
           <span className="link">Couture</span>
           <div className="dropdown-content">
-            <Link to="/couture/sac" className="link">Sacs</Link>
-            <Link to="/couture/trousse" className="link">Trousses/pochettes</Link>
-            <Link to="/couture/accessoires" className="link">Accessoires</Link>
-            <Link to="/couture/divers" className="link">Divers</Link>
+            <Link to="/couture/sac" className="link-dropdown">Sacs</Link>
+            <Link to="/couture/trousse" className="link-dropdown">Trousses/pochettes</Link>
+            <Link to="/couture/accessoires" className="link-dropdown">Accessoires</Link>
+            <Link to="/couture/divers" className="link-dropdown">Divers</Link>
           </div>
         </div>
       </nav>

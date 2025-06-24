@@ -1,0 +1,66 @@
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.custom-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.2s;
+  width: 100%;
+  max-width: 300px;
+  border: var(--color-primary) solid, 2px;
+}
+
+.custom-card:hover {
+  transform: translateY(-4px);
+}
+
+.custom-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.custom-card-content {
+  padding: 16px;
+}
+
+.custom-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-card-title {
+  font-size: var(--text-sm);
+  font-weight: bold;
+  margin: 0;
+}
+
+.custom-card-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #cc0000;
+}
+
+.custom-card-delete:hover {
+  color: red;
+}
+
+.custom-card-description {
+  margin: 8px 0;
+  color: #555;
+}
+
+.custom-card-price {
+  font-weight: bold;
+  color: #333;
+}

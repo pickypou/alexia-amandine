@@ -1,3 +1,7 @@
+
+.custom-text-field{
+  margin-bottom: 1rem;
+}
 .custom-text-field label {
   display: block;
   margin-bottom: 0.25rem;
@@ -8,12 +12,12 @@
 }
 
 .custom-text-field input {
-  width: 100%;
+  width: 60%;
   padding: 8px 12px;
   font-size: var(--text-md);
-  border: 2px solid #FDB7EA;
+  border: 2px solid var(--color-on-primary);
   border-radius: 50px;
-  margin-bottom: 3rem;
+  margin-bottom: 1.2rem;
   background-color: transparent;
 }
 
@@ -27,3 +31,22 @@
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
+.hidden-file-input {
+  display: none;
+}
+
+.custom-file-label {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-on-primary);
+  border-radius: 50px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-label:hover {
+  background-color: #e490c5;
+}
+

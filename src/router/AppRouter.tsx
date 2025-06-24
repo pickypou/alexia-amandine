@@ -8,7 +8,7 @@ import Register from "@auth/register";
 import AdminLayout from "@layouts/adminLayout";
 import Account from "@admin/pages/acount/account";
 import CoutureByNamePage from "@pages/couture/CoutureByNamePage";
-import AddCouture from "@admin/pages/couture/addCouture";
+import AddCouture from "@admin/pages/adminCouture/addCouture";
 
 
 export const router = createBrowserRouter([

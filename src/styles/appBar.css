@@ -18,6 +18,10 @@
   margin-right: 1rem;
 }
 
+.link-dropdown {
+  margin-top: 1rem;
+}
+
 .dropdown {
   position: relative;
 }
@@ -25,7 +29,7 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: var(--color-primary);
   border: 1px solid #ddd;
   padding: 0.5rem;
   top: 100%;
