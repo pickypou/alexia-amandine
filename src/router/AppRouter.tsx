@@ -4,21 +4,27 @@ import Home from "@pages/home/pages/home";
 import AdminPage from "../features/admin/pages/admin/adminPage";
 import Login from "@auth/login";
 import Register from "@auth/register";
-
 import AdminLayout from "@layouts/adminLayout";
 import Account from "@admin/pages/acount/account";
-import CoutureByNamePage from "@pages/couture/CoutureByNamePage";
-import AddCouture from "@admin/pages/adminCouture/addCouture";
+import CreatedListPage from '@pages/createdPage/CreatedListPage';
+import AddCreated from "@admin/pages/adminAddCreated/addCreated";
+import DeleteCreated from "@admin/pages/admin/adminDeleteCreated/deleteCreated";
 
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />, // Layout principal (contient AppBar, Footer, etc.)
-    children: [
-      { index: true, element: <Home /> }, // Page d'accueil
-     { path: "couture/:category", element: <CoutureByNamePage /> }
- // Page de couture par catégorie
+     path: "/",
+  element: <App />,
+  children: [
+    { index: true, element: <Home /> },
+
+    // ✅ Pages par collection et catégorie
+    { path: "couture/:category", element: <CreatedListPage /> },
+    { path: "papier/:category", element: <CreatedListPage /> },
+    { path: "crochet/:category", element: <CreatedListPage /> },
+
+    // ✅ Pages personnalisables
+    { path: "personnalisable/:category", element: <CreatedListPage isCustom /> },
     ],
   },
 
@@ -30,7 +36,8 @@ export const router = createBrowserRouter([
       {path: "register", element: <Register />},
       {path: "login", element: <Login /> }, 
       {path: "account", element: <Account /> },
-      {path: 'addCouture', element: <AddCouture />}
+      {path: 'addCreated', element: <AddCreated />},
+      {path: 'deleteCreated', element: <DeleteCreated />}
      
     ]// Page d'administration
   }
