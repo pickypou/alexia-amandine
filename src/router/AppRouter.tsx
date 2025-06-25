@@ -24,7 +24,10 @@ export const router = createBrowserRouter([
     { path: "crochet/:category", element: <CreatedListPage /> },
 
     // ✅ Pages personnalisables
-    { path: "personnalisable/:category", element: <CreatedListPage isCustom /> },
+{
+  path: "personnalisable/:category",
+  element: <CreatedListPage isCustomPage={true} />
+}
     ],
   },
 

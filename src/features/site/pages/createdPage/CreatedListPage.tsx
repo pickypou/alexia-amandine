@@ -1,3 +1,4 @@
+// CreatedListPage.tsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CreatedRepositoryImpl } from "@data/created/CreatedRepositoryImpl";
@@ -6,51 +7,49 @@ import type { Created } from "@entities/created";
 import CustomCard from "@components/CustomCard";
 
 interface Props {
-  isCustom?: boolean;
+  isCustomPage?: boolean;
 }
 
-const CreatedListPage: React.FC<Props> = ({ isCustom = false }) => {
-  const { collection, category } = useParams();
+const CreatedListPage: React.FC<Props> = ({ isCustomPage = false }) => {
+  const { collection = "", category = "" } = useParams();
   const [items, setItems] = useState<Created[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchData = async () => {
       const repo = new CreatedRepositoryImpl();
       const useCase = new GetAllUseCase(repo);
-      const all = await useCase.execute();
+      const allItems = await useCase.execute();
 
-      let filtered: Created[] = [];
+      const filteredItems = allItems.filter(item => {
+        // Vérification obligatoire de la catégorie
+        const categoryMatch = item.category.toLowerCase() === category.toLowerCase();
+        
+        if (isCustomPage) {
+          // Page personnalisable : seulement les custom=true
+          return categoryMatch && item.custom === true;
+        } else {
+          // Page normale : tous les produits de la collection + catégorie
+          const collectionMatch = collection 
+            ? item.collection.toLowerCase() === collection.toLowerCase()
+            : true;
+          return categoryMatch && collectionMatch;
+        }
+      });
 
-      if (isCustom) {
-        // Affiche tous les produits personnalisables, quelle que soit leur collection
-        filtered = all.filter(
-          (item) =>
-            item.custom === true &&
-            item.category.toLowerCase() === category?.toLowerCase()
-        );
-      } else {
-        // Affiche les produits normaux d'une collection précise
-        filtered = all.filter(
-          (item) =>
-            item.collection.toLowerCase() === collection?.toLowerCase() &&
-            item.category.toLowerCase() === category?.toLowerCase()
-        );
-      }
-
-      setItems(filtered);
+      setItems(filteredItems);
       setLoading(false);
     };
 
-    fetch();
-  }, [collection, category, isCustom]);
+    fetchData();
+  }, [collection, category, isCustomPage]);
 
-  if (loading) return <p>Chargement...</p>;
+   if (loading) return <p>Chargement...</p>;
 
   return (
     <div>
       <h1 style={{ textTransform: "capitalize" }}>
-        {isCustom ? `Personnalisables – ${category}` : `${collection} – ${category}`}
+        {isCustomPage ? `Personnalisables – ${category}` : `${collection} – ${category}`}
       </h1>
 
       {items.length === 0 ? (
@@ -71,5 +70,7 @@ const CreatedListPage: React.FC<Props> = ({ isCustom = false }) => {
     </div>
   );
 };
+
+
 
 export default CreatedListPage;
