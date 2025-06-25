@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CoutureRepositoryImpl } from "@data/couture/CoutureRepositoryImpl";
-import { GetAllCoutureUseCase } from "@usecases/couture/getAllCoutureUseCase";
-import type { Couture } from "@entities/Couture";
+import { CreatedRepositoryImpl } from "@data/created/CreatedRepositoryImpl";
+import { GetAllUseCase } from "@usecases/createdUseCase/getAllUseCase";
+import type { Created } from "@entities/created";
 import CustomCard from "@components/CustomCard";
 
 const CoutureByNamePage: React.FC = () => {
   const { category } = useParams();
-  const [items, setItems] = useState<Couture[]>([]);
+  const [items, setItems] = useState<Created[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetch = async () => {
-      const repo = new CoutureRepositoryImpl();
-      const useCase = new GetAllCoutureUseCase(repo);
+      const repo = new CreatedRepositoryImpl();
+      const useCase = new GetAllUseCase(repo);
       const all = await useCase.execute();
       const filtered = all.filter(
         (item) => item.name.toLowerCase() === category?.toLowerCase()

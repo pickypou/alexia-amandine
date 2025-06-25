@@ -1,64 +1,64 @@
-import type { Couture } from "@entities/Couture";
-import type { AddCoutureUseCase } from "@usecases/couture/addCoutureUseCase";
-import type { CustomCoutureUseCase } from "@usecases/couture/customCoutureUseCase";
-import type { DeleteCoutureUseCase } from "@usecases/couture/deleteCoutureUseCase";
-import type { GetAllCoutureUseCase } from "@usecases/couture/getAllCoutureUseCase";
-import type { GetCoutureByIdUseCase } from "@usecases/couture/getCoutureByIdUseCase";
-import type { updateCoutureUseCase } from "@usecases/couture/updateCoutureUseCase";
+import type { Created } from "@entities/created";
+import type { AddUseCase } from "@usecases/createdUseCase/addCreatedUseCase";
+import type { CustomUseCase } from "@usecases/createdUseCase/customCreatedUseCase";
+import type { DeleteUseCase } from "@usecases/createdUseCase/deleteCreatedUseCase";
+import type { GetAllUseCase } from "@usecases/createdUseCase/getAllUseCase";
+import type { GetByIdUseCase } from "@usecases/createdUseCase/getByIdUseCase";
+import type { updateUseCase } from "@usecases/createdUseCase/updateCoutureUseCase";
 
 
 export class CoutureInteractor {
   constructor(
-    private readonly getAllCoutureUseCase: GetAllCoutureUseCase, 
-    private readonly getCoutureByIdUseCase: GetCoutureByIdUseCase, 
-    private readonly updateCoutureUseCase: updateCoutureUseCase, 
-    private readonly deleteCoutureUseCase: DeleteCoutureUseCase, 
-    private readonly customCoutureUseCase: CustomCoutureUseCase,
-    private readonly addCoutureUseCase: AddCoutureUseCase
+    private readonly getAllUseCase: GetAllUseCase, 
+    private readonly getByIdUseCase: GetByIdUseCase, 
+    private readonly updateUseCase: updateUseCase, 
+    private readonly deleteUseCase: DeleteUseCase, 
+    private readonly customUseCase: CustomUseCase,
+    private readonly addUseCase: AddUseCase
   ) {}
 
-  async getAllCoutures(): Promise<Couture[]> { // Replace 'Couture[]' with actual type if needed
-    return await this.getAllCoutureUseCase.execute(); // Assuming this method returns all coutures
+  async getAll(): Promise<Created[]> { // Replace 'Couture[]' with actual type if needed
+    return await this.getAllUseCase.execute(); // Assuming this method returns all coutures
   } 
-async getCoutureById(id: string): Promise<Couture | null> { // Replace 'Couture | null' with actual type if needed
+async getById(id: string): Promise<Created | null> { // Replace 'Couture | null' with actual type if needed
     if (!id) {
-      throw new Error("Couture ID is required");
+      throw new Error("Created ID is required");
     }
     if (typeof id !== "string") {
-      throw new Error("Couture ID must be a string");
+      throw new Error("Created ID must be a string");
     }
-    return await this.getCoutureByIdUseCase.execute(id); // Assuming this method exists in the use case
+    return await this.getByIdUseCase.execute(id); // Assuming this method exists in the use case
   }
 
-  async addCouture(couture: Couture): Promise<Couture | boolean> { 
-    if (!couture || !couture.name || !couture.description) {
-      throw new Error("Couture name and description are required");
+  async add(created: Created): Promise<Created | boolean> { 
+    if (!created || !created.name || !created.description) {
+      throw new Error("Created name and description are required");
     }
-    if (typeof couture.name !== "string" || typeof couture.description !== "string") {
-      throw new Error("Couture name and description must be strings");
+    if (typeof created.name !== "string" || typeof created.description !== "string") {
+      throw new Error("Created name and description must be strings");
     }
-    if (couture.price < 0) {
-      throw new Error("Couture price must be a positive number");
+    if (created.price < 0) {
+      throw new Error("Created price must be a positive number");
     }
-    if (couture.customizable === undefined) {
-      throw new Error("Couture customizable field is required");
+    if (created.customizable === undefined) {
+      throw new Error("Created customizable field is required");
     }
-    if (couture.imageUrl && !(typeof couture.imageUrl === "string" || couture.imageUrl instanceof File)) {
-      throw new Error("Couture imageUrl must be a string or a File object");
+    if (created.imageUrl && !(typeof created.imageUrl === "string" || created.imageUrl instanceof File)) {
+      throw new Error("Created imageUrl must be a string or a File object");
     }
-   return await this.addCoutureUseCase.execute(couture);
+   return await this.addUseCase.execute(created);
   }
   
 
-  async updateCouture(id: string, couture: Couture): Promise<Couture | null> { // Replace 'any' with actual type
-    return await this.updateCoutureUseCase.execute(id, couture);
+  async update(id: string, created: Created): Promise<Created | null> { // Replace 'any' with actual type
+    return await this.updateUseCase.execute(id, created);
   }
 
-  async deleteCouture(id: string): Promise<boolean> {
-    return await this.deleteCoutureUseCase.execute(id);
+  async delete(id: string): Promise<boolean> {
+    return await this.deleteUseCase.execute(id);
   }
 
-  async customCouture(name: string): Promise<boolean> {
-    return await this.customCoutureUseCase.execute(name);
+  async custom(name: string): Promise<boolean> {
+    return await this.customUseCase.execute(name);
   }
 }
