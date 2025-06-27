@@ -5,6 +5,7 @@ import { CreatedRepositoryImpl } from "@data/created/CreatedRepositoryImpl";
 import { GetAllUseCase } from "@usecases/createdUseCase/getAllUseCase";
 import type { Created } from "@entities/created";
 import CustomCard from "@components/CustomCard";
+import styles from "./createdListPage.module.css"
 
 interface Props {
   isCustomPage?: boolean;
@@ -49,13 +50,13 @@ const CreatedListPage: React.FC<Props> = ({ isCustomPage = false }) => {
   return (
     <div>
       <h1 style={{ textTransform: "capitalize" }}>
-        {isCustomPage ? `Personnalisables – ${category}` : `${collection} – ${category}`}
+        {isCustomPage ? `Personnalisables  ${category}` : `${collection}  ${category}`}
       </h1>
 
       {items.length === 0 ? (
         <p>Aucun élément trouvé pour cette catégorie.</p>
       ) : (
-        <div className="card-container">
+        <div className={styles.cardContainer}>
           {items.map((item) => (
             <CustomCard
               key={item.id}

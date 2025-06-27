@@ -1,27 +1,73 @@
-/* Structure de base */
+/* Styles de base */
 .header {
   background-color: var(--color-primary);
-  padding: 1rem; 
+  padding: 1rem;
   width: 100%;
   border-bottom: 1px solid #ccc;
+  position: relative;
+  z-index: 100;
 }
-.nav {
+
+/* Navigation desktop */
+.desktop-nav {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 }
 
-.link {
+/* Navigation mobile */
+.mobile-nav {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
   color: var(--color-surface);
-  text-decoration: none;
-  font-size: var(--text-sm);
-  margin-right: 1rem;
+  padding: 0.5rem;
 }
 
-.link-dropdown {
-  margin-top: 1rem;
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 998;
 }
 
+/* Drawer mobile */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100vh;
+  background-color: var(--color-primary);
+  z-index: 999;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobile-drawer.open {
+  transform: translateX(300px);
+}
+
+.drawer-content {
+  padding: 1rem;
+}
+
+.drawer-section {
+  margin-bottom: 1rem;
+}
+
+/* Dropdown styles */
 .dropdown {
   position: relative;
 }
@@ -35,11 +81,43 @@
   top: 100%;
   left: 0;
   z-index: 1000;
-  flex-direction: column;
 }
 
 .dropdown:hover .dropdown-content {
-  display: flex;
+  display: block;
 }
-  
 
+.link {
+  color: var(--color-surface);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  display: block;
+  padding: 0.5rem 0;
+}
+
+.link-dropdown {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-nav {
+    display: flex;
+  }
+
+  .dropdown-content {
+    position: relative;
+    border: none;
+    display: none;
+  }
+
+  .dropdown-content.visible {
+    display: block;
+    margin-left: 1rem;
+  }
+}

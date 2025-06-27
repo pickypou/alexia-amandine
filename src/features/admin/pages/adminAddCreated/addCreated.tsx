@@ -4,13 +4,14 @@ import { storage, db } from "@lib/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import Button from "@components/Button";
 import CustomTextField from "@components/CustomTextField";
+import styles from './addCreated.module.css'
 
-const collections = ["couture", "papier", "crochet", "personnalisable"];
+const collections = ["couture", "papier", "crochet"];
 const categoriesByCollection: Record<string, string[]> = {
-  couture: ["sac", "trousse", "accessoires", "divers"],
-  papier: ["carte", "accessoires", "divers"],
-  crochet: ["sac", "peluches", "accessoires"],
-  personnalisable: ["sac", "peluches", "accessoires"],
+  couture: ["sac", "trousse", "decoration","accessoires", "divers","événement"],
+  papier: ["emballage", "accessoires", "divers"],
+  crochet: ["sac", "peluches", "accessoires","poupées","composition-florales", "couverture"],
+  
 };
 
 export default function AddCreated() {
@@ -30,49 +31,48 @@ export default function AddCreated() {
   }, [collectionName]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!file) {
-      alert("Veuillez sélectionner une image");
-      return;
-    }
+  if (!file) {
+    alert("Veuillez sélectionner une image");
+    return;
+  }
 
-    try {
-      // On détermine la collection réelle de stockage pour l'image
-      const uploadCollection =
-        collectionName === "personnalisable" ? "couture" : collectionName;
+  try {
+    const fileName = `${Date.now()}_${file.name}`;
+    const storageRef = ref(storage, `created/${fileName}`); // Dossier unique
+    const snapshot = await uploadBytes(storageRef, file);
+    const imageUrl = await getDownloadURL(snapshot.ref);
 
-      const storageRef = ref(storage, `${uploadCollection}/${file.name}`);
-      const snapshot = await uploadBytes(storageRef, file);
-      const imageUrl = await getDownloadURL(snapshot.ref);
+    await addDoc(collection(db, "created"), {
+      collection: collectionName,
+      category,
+      name,
+      description,
+      price,
+      custom: collectionName === "personnalisable" ? true : custom,
+      imageUrl,
+      createdAt: new Date().toISOString(),
+    });
 
-      await addDoc(collection(db, "created"), {
-        collection: collectionName,
-        category,
-        name,
-        description,
-        price,
-        custom: collectionName === "personnalisable" ? true : custom,
-        imageUrl,
-        createdAt: new Date().toISOString(),
-      });
+    alert("Création ajoutée !");
+    // Reset formulaire
+    setName("");
+    setDescription("");
+    setPrice("");
+    setFile(null);
+    setCategory(categoriesByCollection[collectionName][0]);
+    if (collectionName !== "personnalisable") setCustom(false);
+  } catch (error) {
+    console.error("Erreur lors de l'ajout :", error);
+    alert("Erreur lors de l'ajout, veuillez réessayer.");
+  }
+};
 
-      alert("Création ajoutée !");
-      // Reset formulaire
-      setName("");
-      setDescription("");
-      setPrice("");
-      setFile(null);
-      setCategory(categoriesByCollection[collectionName][0]);
-      if (collectionName !== "personnalisable") setCustom(false);
-    } catch (error) {
-      console.error("Erreur lors de l'ajout :", error);
-      alert("Erreur lors de l'ajout, veuillez réessayer.");
-    }
-  };
 
   return (
-    <form onSubmit={handleSubmit}>
+ 
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
       <label>Collection</label>
       <select
         value={collectionName}
