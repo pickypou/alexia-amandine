@@ -1,32 +1,63 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import { onRequest } from "firebase-functions/v2/https";
+import { defineSecret } from "firebase-functions/params";
+import * as nodemailer from "nodemailer";
 
-import {setGlobalOptions} from "firebase-functions";
-import {onRequest} from "firebase-functions/https";
-import * as logger from "firebase-functions/logger";
+const SMTP_USER = defineSecret("SMTP_USER");
+const SMTP_PASSWORD = defineSecret("SMTP_PASSWORD");
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+export const sendMail = onRequest(
+  {
+    cors: true,
+    secrets: [SMTP_USER, SMTP_PASSWORD],
+    timeoutSeconds: 60, // Augmentez le timeout
+    memory: "512MiB", // Augmentez la mémoire
+  },
+  async (req, res) => {
+    // Vérification de la méthode HTTP
+    if (req.method !== "POST") {
+      res.status(405).send("Method Not Allowed");
+      return;
+    }
 
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
-setGlobalOptions({ maxInstances: 10 });
+    // Validation du corps de la requête
+    if (!req.body || typeof req.body !== "object") {
+      res.status(400).json({ error: "Corps de requête invalide" });
+      return;
+    }
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+    const { nom, email, message } = req.body;
+
+    if (!nom || !message) {
+      res.status(400).json({ error: "Nom et message sont requis." });
+      return;
+    }
+
+    try {
+     const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: SMTP_USER.value(),
+    pass: SMTP_PASSWORD.value(),
+  },
+});
+
+      await transporter.sendMail({
+        from: `"Site Féerique" <${SMTP_USER.value()}>`,
+        to: SMTP_USER.value(),
+        subject: `Message de ${nom}`,
+        text: `Nom: ${nom}\nEmail: ${email || "Non fourni"}\n\nMessage:\n${message}`,
+        replyTo: email || undefined,
+      });
+
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error("Erreur complète:", error);
+      res.status(500).json({
+        error: "Erreur serveur",
+        details: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
+);

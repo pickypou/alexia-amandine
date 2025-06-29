@@ -67,6 +67,7 @@ export default function AppBar() {
         {/* Version desktop */}
         <div className="desktop-nav">
           <Link to="/" className="link">Accueil</Link>
+          <Link to="/contact" className="link">Contact</Link>
           {sections.map(section => (
             <div className="dropdown" key={section.name}>
               <span className="link" onClick={() => toggleDropdown(section.name)}>
@@ -86,7 +87,8 @@ export default function AppBar() {
         {/* Version mobile */}
         <div className="mobile-nav">
           <button className="hamburger" onClick={toggleDrawer}>☰</button>
-          <Link to="/" className="link">Alexia</Link>
+          <Link to="/" className="link">Accueil</Link>
+          <Link to="/contact" className="link">Contact</Link>
         </div>
       </header>
 
@@ -116,6 +118,7 @@ export default function AppBar() {
                   >
                     {label}
                   </Link>
+                  
                 ))}
               </div>
             </div>

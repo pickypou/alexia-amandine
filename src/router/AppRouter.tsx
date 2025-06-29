@@ -9,6 +9,7 @@ import Account from "@admin/pages/acount/account";
 import CreatedListPage from '@pages/createdPage/CreatedListPage';
 import AddCreated from "@admin/pages/adminAddCreated/addCreated";
 import DeleteCreated from "@admin/pages/admin/adminDeleteCreated/deleteCreated";
+import ContactPage from "@pages/contactPage/contactPage";
 
 
 export const router = createBrowserRouter([
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
     { path: "couture/:category", element: <CreatedListPage /> },
     { path: "papier/:category", element: <CreatedListPage /> },
     { path: "crochet/:category", element: <CreatedListPage /> },
+    {path: "/contact", element: <ContactPage />},
 
     // ✅ Pages personnalisables
 {

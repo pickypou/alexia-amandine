@@ -10,6 +10,7 @@ import Account from "@admin/pages/acount/account";
 import CreatedListPage from '@pages/createdPage/CreatedListPage';
 import AddCreated from "@admin/pages/adminAddCreated/addCreated";
 import DeleteCreated from "@admin/pages/admin/adminDeleteCreated/deleteCreated";
+import ContactPage from "@pages/contactPage/contactPage";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
             { path: "couture/:category", element: _jsx(CreatedListPage, {}) },
             { path: "papier/:category", element: _jsx(CreatedListPage, {}) },
             { path: "crochet/:category", element: _jsx(CreatedListPage, {}) },
+            { path: "/contact", element: _jsx(ContactPage, {}) },
             // ✅ Pages personnalisables
             {
                 path: "personnalisable/:category",

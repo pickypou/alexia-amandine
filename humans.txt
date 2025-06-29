@@ -1,0 +1,14 @@
+/* TEAM */
+Developer: Ludovic Spysschaert
+Site: https://ludovicspysschaert.fr/
+Location: Seclin, France
+GitHub: https://github.com/tonpseudo
+
+/* SITE */
+Name: Les petites créas d'Alexia & La petite fée crochette
+Description: Site vitrine d'artisanat fait main (couture, crochet, papier, personnalisables).
+Built with: React.js, TypeScript, Vite, Firebase Hosting
+Last update: 2025-06-27
+
+/* THANKS */
+Thanks to Open Source and the React community
