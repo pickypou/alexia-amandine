@@ -28,30 +28,36 @@ const Login: React.FC = () => {
   };
 
   return (
+    <>
+      <h1 className='mt-5 mb-5'>Connexion</h1>
     <div className={styles.container}>
       <div>
-        <h2>Connexion</h2>
+      
         <form onSubmit={handleLogin}>
           <CustomTextField
             label="Email"
             type="email"
             value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <CustomTextField
             label="Mot de passe"
             type="password"
             value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <div className ="button-container">
           <Button type="submit" label="Se connecter" />
-          <Button type="default" label="Retour" redirectTo="/admin" />
+          <Button type="default" label="Retour sur le site" redirectTo="/" />
+          </div>
           {error && <p className={styles.error}>{error}</p>}
+          
         </form>
       </div>
     </div>
+    </>
   );
 };
 

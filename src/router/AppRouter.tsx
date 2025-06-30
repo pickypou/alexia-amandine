@@ -10,40 +10,40 @@ import CreatedListPage from '@pages/createdPage/CreatedListPage';
 import AddCreated from "@admin/pages/adminAddCreated/addCreated";
 import DeleteCreated from "@admin/pages/admin/adminDeleteCreated/deleteCreated";
 import ContactPage from "@pages/contactPage/contactPage";
+import { AddAvisClient } from "@pages/avis_clients/addAvisClients";
+import { AvisClientsList } from "@pages/avis_clients/avisClientsList";
 
 
 export const router = createBrowserRouter([
   {
-     path: "/",
-  element: <App />,
-  children: [
-    { index: true, element: <Home /> },
-
-    // ✅ Pages par collection et catégorie
-    { path: "couture/:category", element: <CreatedListPage /> },
-    { path: "papier/:category", element: <CreatedListPage /> },
-    { path: "crochet/:category", element: <CreatedListPage /> },
-    {path: "/contact", element: <ContactPage />},
-
-    // ✅ Pages personnalisables
-{
-  path: "personnalisable/:category",
-  element: <CreatedListPage isCustomPage={true} />
-}
+    path: "/",
+    element: <App />,
+   
+    children: [
+      { index: true, element: <Home /> },
+      { path: "couture/:category", element: <CreatedListPage /> },
+      { path: "papier/:category", element: <CreatedListPage /> },
+      { path: "crochet/:category", element: <CreatedListPage /> },
+      { path: "contact", element: <ContactPage /> },
+      { path: "addavisClient", element: <AddAvisClient /> },
+      { path: "avisClients", element: <AvisClientsList /> }, // Minuscule ici
+      { 
+        path: "personnalisable/:category",
+        element: <CreatedListPage isCustomPage={true} />
+      },
+     
     ],
   },
-
   {
     path: "/admin",
-    element: <AdminLayout />, 
+    element: <AdminLayout />,
     children: [
       { index: true, element: <AdminPage /> },
-      {path: "register", element: <Register />},
-      {path: "login", element: <Login /> }, 
-      {path: "account", element: <Account /> },
-      {path: 'addCreated', element: <AddCreated />},
-      {path: 'deleteCreated', element: <DeleteCreated />}
-     
-    ]// Page d'administration
+      { path: "register", element: <Register /> },
+      { path: "login", element: <Login /> }, 
+      { path: "account", element: <Account /> },
+      { path: "addCreated", element: <AddCreated /> },
+      { path: "deleteCreated", element: <DeleteCreated /> }
+    ]
   }
 ]);

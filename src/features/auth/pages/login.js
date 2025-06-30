@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import React, { useState } from 'react';
 import { AuthInteractor } from '@interactor/AuthInteractor';
 import { AuthRepositoryImpl } from '@data/auth/AuthRepositoryImpl';
@@ -25,6 +25,6 @@ const Login = () => {
             setError('Erreur de connexion, veuillez vérifier vos identifiants.');
         }
     };
-    return (_jsx("div", { className: styles.container, children: _jsxs("div", { children: [_jsx("h2", { children: "Connexion" }), _jsxs("form", { onSubmit: handleLogin, children: [_jsx(CustomTextField, { label: "Email", type: "email", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx(CustomTextField, { label: "Mot de passe", type: "password", value: password, onChange: (e) => setPassword(e.target.value), required: true }), _jsx(Button, { type: "submit", label: "Se connecter" }), _jsx(Button, { type: "default", label: "Retour", redirectTo: "/admin" }), error && _jsx("p", { className: styles.error, children: error })] })] }) }));
+    return (_jsxs(_Fragment, { children: [_jsx("h1", { className: 'mt-5 mb-5', children: "Connexion" }), _jsx("div", { className: styles.container, children: _jsx("div", { children: _jsxs("form", { onSubmit: handleLogin, children: [_jsx(CustomTextField, { label: "Email", type: "email", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx(CustomTextField, { label: "Mot de passe", type: "password", value: password, onChange: (e) => setPassword(e.target.value), required: true }), _jsxs("div", { className: "button-container", children: [_jsx(Button, { type: "submit", label: "Se connecter" }), _jsx(Button, { type: "default", label: "Retour sur le site", redirectTo: "/" })] }), error && _jsx("p", { className: styles.error, children: error })] }) }) })] }));
 };
 export default Login;

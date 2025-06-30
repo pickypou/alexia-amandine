@@ -2,7 +2,7 @@ import AppBar from "./shared/components/AppBar";
 import Footer from "./shared/components/Footer";
 import { Outlet } from "react-router-dom"; 
 
-import '@styles/global.css';
+
 
 export default function App() {
   return (

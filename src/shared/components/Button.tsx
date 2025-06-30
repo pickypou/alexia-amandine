@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import '@styles/button.css'; 
+
 
 type ButtonType = 'submit' | 'delete' | 'add' | 'default';
 

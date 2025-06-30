@@ -1,7 +1,7 @@
 // src/components/AppBar.tsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "@styles/appBar.css";
+
 
 export default function AppBar() {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -60,14 +60,14 @@ export default function AppBar() {
       ]
     }
   ];
- return (
+
+  return (
     <>
       {/* Header principal */}
       <header className="header">
         {/* Version desktop */}
         <div className="desktop-nav">
           <Link to="/" className="link">Accueil</Link>
-          <Link to="/contact" className="link">Contact</Link>
           {sections.map(section => (
             <div className="dropdown" key={section.name}>
               <span className="link" onClick={() => toggleDropdown(section.name)}>
@@ -82,13 +82,16 @@ export default function AppBar() {
               </div>
             </div>
           ))}
+          
+          {/* Ces liens doivent être en dehors de la boucle map */}
+          <Link to="/contact" className="link">Contact</Link>
+          <Link to="/avisClients" className="link">Avis-clients</Link>
         </div>
 
         {/* Version mobile */}
         <div className="mobile-nav">
           <button className="hamburger" onClick={toggleDrawer}>☰</button>
           <Link to="/" className="link">Accueil</Link>
-          <Link to="/contact" className="link">Contact</Link>
         </div>
       </header>
 
@@ -118,11 +121,12 @@ export default function AppBar() {
                   >
                     {label}
                   </Link>
-                  
                 ))}
               </div>
             </div>
           ))}
+          <Link to="/contact" className="link" onClick={closeDrawer}>Contact</Link>
+          <Link to="/avisClients" className="link" onClick={closeDrawer}>Avis-clients</Link>
         </div>
       </div>
     </>

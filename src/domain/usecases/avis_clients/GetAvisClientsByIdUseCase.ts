@@ -1,0 +1,11 @@
+import type { AvisClients } from "@entities/avisClients";
+import type { AvisClientsRepository } from "@repositories/AvisClientsRepository";
+
+export class GetAvisClientsByIdUseCase {
+    constructor(private repository: AvisClientsRepository) {};
+
+    async execute(id: string): Promise<AvisClients | null> {
+        if (!id) throw new Error("L'id est requis");
+        return this.repository.avisClientsGetById(id);
+    }
+}

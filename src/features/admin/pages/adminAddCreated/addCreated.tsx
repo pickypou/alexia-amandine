@@ -5,6 +5,7 @@ import { addDoc, collection } from "firebase/firestore";
 import Button from "@components/Button";
 import CustomTextField from "@components/CustomTextField";
 import styles from './addCreated.module.css'
+import CustomTextarea from "@components/CustomTextarea";
 
 const collections = ["couture", "papier", "crochet"];
 const categoriesByCollection: Record<string, string[]> = {
@@ -105,12 +106,11 @@ export default function AddCreated() {
         required
       />
 
-      <CustomTextField
-        label="Description"
-        type="text"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
+      <CustomTextarea 
+      label="Je décrit mona création"
+      value="description"
+      onChange={(e)=> setDescription(e.target.value)}
+     
       />
 
       <CustomTextField

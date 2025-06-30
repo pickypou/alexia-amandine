@@ -1,7 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import '@styles/button.css';
 const Button = ({ label, type = 'default', onClick, redirectTo, disabled, }) => {
     const navigate = useNavigate();
     const handleClick = () => {

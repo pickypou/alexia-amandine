@@ -11,22 +11,24 @@ import CreatedListPage from '@pages/createdPage/CreatedListPage';
 import AddCreated from "@admin/pages/adminAddCreated/addCreated";
 import DeleteCreated from "@admin/pages/admin/adminDeleteCreated/deleteCreated";
 import ContactPage from "@pages/contactPage/contactPage";
+import { AddAvisClient } from "@pages/avis_clients/addAvisClients";
+import { AvisClientsList } from "@pages/avis_clients/avisClientsList";
 export const router = createBrowserRouter([
     {
         path: "/",
         element: _jsx(App, {}),
         children: [
             { index: true, element: _jsx(Home, {}) },
-            // ✅ Pages par collection et catégorie
             { path: "couture/:category", element: _jsx(CreatedListPage, {}) },
             { path: "papier/:category", element: _jsx(CreatedListPage, {}) },
             { path: "crochet/:category", element: _jsx(CreatedListPage, {}) },
-            { path: "/contact", element: _jsx(ContactPage, {}) },
-            // ✅ Pages personnalisables
+            { path: "contact", element: _jsx(ContactPage, {}) },
+            { path: "addavisClient", element: _jsx(AddAvisClient, {}) },
+            { path: "avisClients", element: _jsx(AvisClientsList, {}) }, // Minuscule ici
             {
                 path: "personnalisable/:category",
                 element: _jsx(CreatedListPage, { isCustomPage: true })
-            }
+            },
         ],
     },
     {
@@ -37,8 +39,8 @@ export const router = createBrowserRouter([
             { path: "register", element: _jsx(Register, {}) },
             { path: "login", element: _jsx(Login, {}) },
             { path: "account", element: _jsx(Account, {}) },
-            { path: 'addCreated', element: _jsx(AddCreated, {}) },
-            { path: 'deleteCreated', element: _jsx(DeleteCreated, {}) }
-        ] // Page d'administration
+            { path: "addCreated", element: _jsx(AddCreated, {}) },
+            { path: "deleteCreated", element: _jsx(DeleteCreated, {}) }
+        ]
     }
 ]);

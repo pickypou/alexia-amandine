@@ -1,0 +1,37 @@
+.custom-textarea-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.custom-label {
+  margin-bottom: 0.5rem;
+}
+
+.custom-textarea {
+    margin: 0 auto;
+    width: 60%;
+    background-color: transparent;
+  resize: vertical;
+  padding: 0.75rem;
+  font-size: var(--text-md);
+  border-radius: 12px;
+  border: 2px solid var(--color-on-primary);
+  transition: border 0.2s;
+  font-family: inherit;
+}
+
+.custom-textarea:focus {
+  border-color: var(--color-primary,);
+  outline: none;
+}
+
+.has-error {
+ border-color:var(--color-on-primary);;
+}
+
+.error-text {
+  color: var(--color-surface);
+  font-size:var(--text-md);
+  margin-top: 0.25rem;
+}

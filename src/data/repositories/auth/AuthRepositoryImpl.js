@@ -22,6 +22,7 @@ export class AuthRepositoryImpl {
             id: uid,
             email,
             userName,
+            admin: false,
         };
     }
     async login(email, password) {
@@ -41,6 +42,7 @@ export class AuthRepositoryImpl {
             id: uid,
             email: data.email,
             userName: data.userName,
+            admin: data.admin
         };
     }
     async logout() {
@@ -57,11 +59,12 @@ export class AuthRepositoryImpl {
         if (!userDoc.exists())
             return null;
         const data = userDoc.data();
-        console.log("Utilisateur récupéré :", data);
+        //console.log("Utilisateur récupéré :", data);
         return {
             id: currentUser.uid,
             email: data.email,
             userName: data.userName, // <--- ici tu utilises bien `userName`
+            admin: data.admin === true
         };
     }
 }
