@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db } from "@lib/firebase";
@@ -7,11 +7,13 @@ import Button from "@components/Button";
 import CustomTextField from "@components/CustomTextField";
 import styles from './addCreated.module.css';
 import CustomTextarea from "@components/CustomTextarea";
-const collections = ["couture", "papier", "crochet"];
+import AppBarAdmin from "@components/AppBbarAdmin";
+const collections = ["couture", "papier", "crochet", "personnalisable"];
 const categoriesByCollection = {
-    couture: ["sac", "trousse", "decoration", "accessoires", "divers", "événement"],
-    papier: ["emballage", "accessoires", "divers"],
-    crochet: ["sac", "peluches", "accessoires", "poupées", "composition-florales", "couverture"],
+    couture: ["sac", "trousse/pochettes", "accessoires", "divers"],
+    papier: ["emballage", "decoration", "accessoires", "divers", "fête/événement"],
+    crochet: ["peluches", "poupées", "composition-florales", "accessoires", "sacs à mains"],
+    personnalisable: ["sac", "trousse", "Textile", "Adhéssif", "Tasse/gobelets", "Accéssoire", "fête/événements"]
 };
 export default function AddCreated() {
     const [collectionName, setCollectionName] = useState(collections[0]);
@@ -63,8 +65,8 @@ export default function AddCreated() {
             alert("Erreur lors de l'ajout, veuillez réessayer.");
         }
     };
-    return (_jsxs("form", { onSubmit: handleSubmit, className: styles.formContainer, children: [_jsx("label", { children: "Collection" }), _jsx("select", { value: collectionName, onChange: (e) => {
-                    setCollectionName(e.target.value);
-                    setCategory(categoriesByCollection[e.target.value][0]);
-                }, children: collections.map((col) => (_jsx("option", { value: col, children: col }, col))) }), _jsx("label", { children: "Cat\u00E9gorie" }), _jsx("select", { value: category, onChange: (e) => setCategory(e.target.value), children: categoriesByCollection[collectionName].map((cat) => (_jsx("option", { value: cat, children: cat }, cat))) }), _jsx(CustomTextField, { label: "Nom", type: "text", value: name, onChange: (e) => setName(e.target.value), required: true }), _jsx(CustomTextarea, { label: "Je d\u00E9crit mona cr\u00E9ation", value: "description", onChange: (e) => setDescription(e.target.value) }), _jsx(CustomTextField, { label: "Prix", type: "text", value: price, onChange: (e) => setPrice(e.target.value), required: true }), collectionName !== "personnalisable" && (_jsxs("label", { children: [_jsx("input", { type: "checkbox", checked: custom, onChange: (e) => setCustom(e.target.checked) }), "Personnalisable"] })), _jsx(CustomTextField, { label: "Image", type: "file", accept: "image/*", onChange: (e) => setFile(e.target.files?.[0] || null), required: true }), _jsx(Button, { type: "submit", label: "Ajouter" })] }));
+    return (_jsxs(_Fragment, { children: [_jsx(AppBarAdmin, {}), _jsxs("form", { onSubmit: handleSubmit, className: styles.formContainer, children: [_jsx("label", { children: "Collection" }), _jsx("select", { value: collectionName, onChange: (e) => {
+                            setCollectionName(e.target.value);
+                            setCategory(categoriesByCollection[e.target.value][0]);
+                        }, children: collections.map((col) => (_jsx("option", { value: col, children: col }, col))) }), _jsx("label", { children: "Cat\u00E9gorie" }), _jsx("select", { value: category, onChange: (e) => setCategory(e.target.value), children: categoriesByCollection[collectionName].map((cat) => (_jsx("option", { value: cat, children: cat }, cat))) }), _jsx(CustomTextField, { label: "Nom", type: "text", value: name, onChange: (e) => setName(e.target.value), required: true }), _jsx(CustomTextarea, { label: "Je d\u00E9crit ma cr\u00E9ation", value: description, onChange: (e) => setDescription(e.target.value) }), _jsx(CustomTextField, { label: "Prix", type: "text", value: price, onChange: (e) => setPrice(e.target.value), required: true }), collectionName !== "personnalisable" && (_jsxs("label", { children: [_jsx("input", { type: "checkbox", checked: custom, onChange: (e) => setCustom(e.target.checked) }), "Personnalisable"] })), _jsx(CustomTextField, { label: "Image", type: "file", accept: "image/*", onChange: (e) => setFile(e.target.files?.[0] || null), required: true }), _jsx(Button, { type: "submit", label: "Ajouter" })] })] }));
 }

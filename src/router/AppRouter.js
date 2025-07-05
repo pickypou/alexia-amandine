@@ -9,10 +9,11 @@ import AdminLayout from "@layouts/adminLayout";
 import Account from "@admin/pages/acount/account";
 import CreatedListPage from '@pages/createdPage/CreatedListPage';
 import AddCreated from "@admin/pages/adminAddCreated/addCreated";
-import DeleteCreated from "@admin/pages/admin/adminDeleteCreated/deleteCreated";
 import ContactPage from "@pages/contactPage/contactPage";
 import { AddAvisClient } from "@pages/avis_clients/addAvisClients";
 import { AvisClientsList } from "@pages/avis_clients/avisClientsList";
+import DeleteAvisClients from "@admin/pages/adminDeleteAvisClients/AdminDeleteAvisClients";
+import DeleteCreated from "@admin/pages/adminDeleteCreated/deleteCreated";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -40,7 +41,8 @@ export const router = createBrowserRouter([
             { path: "login", element: _jsx(Login, {}) },
             { path: "account", element: _jsx(Account, {}) },
             { path: "addCreated", element: _jsx(AddCreated, {}) },
-            { path: "deleteCreated", element: _jsx(DeleteCreated, {}) }
+            { path: "deleteCreated", element: _jsx(DeleteCreated, {}) },
+            { path: "deleteAvis", element: _jsx(DeleteAvisClients, {}) }
         ]
     }
 ]);

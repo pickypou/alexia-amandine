@@ -91,7 +91,7 @@ export default function AppBar() {
         {/* Version mobile */}
         <div className="mobile-nav">
           <button className="hamburger" onClick={toggleDrawer}>☰</button>
-          <Link to="/" className="link">Accueil</Link>
+          
         </div>
       </header>
 

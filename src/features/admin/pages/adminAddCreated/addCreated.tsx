@@ -6,12 +6,14 @@ import Button from "@components/Button";
 import CustomTextField from "@components/CustomTextField";
 import styles from './addCreated.module.css'
 import CustomTextarea from "@components/CustomTextarea";
+import AppBarAdmin from "@components/AppBbarAdmin";
 
-const collections = ["couture", "papier", "crochet"];
+const collections = ["couture", "papier", "crochet", "personnalisable"];
 const categoriesByCollection: Record<string, string[]> = {
-  couture: ["sac", "trousse", "decoration","accessoires", "divers","événement"],
-  papier: ["emballage", "accessoires", "divers"],
-  crochet: ["sac", "peluches", "accessoires","poupées","composition-florales", "couverture"],
+  couture: ["sac", "trousse/pochettes","accessoires", "divers"],
+  papier: ["emballage", "decoration", "accessoires", "divers", "fête/événement"],
+  crochet: ["peluches", "poupées","composition-florales","accessoires", "sacs à mains"],
+  personnalisable : ["sac", "trousse","Textile", "Adhéssif", "Tasse/gobelets", "Accéssoire", "fête/événements"]
   
 };
 
@@ -72,7 +74,8 @@ export default function AddCreated() {
 
 
   return (
- 
+    <>
+  <AppBarAdmin/>
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       <label>Collection</label>
       <select
@@ -107,8 +110,8 @@ export default function AddCreated() {
       />
 
       <CustomTextarea 
-      label="Je décrit mona création"
-      value="description"
+      label="Je décrit ma création"
+      value = {description}
       onChange={(e)=> setDescription(e.target.value)}
      
       />
@@ -142,5 +145,6 @@ export default function AddCreated() {
 
       <Button type="submit" label="Ajouter" />
     </form>
+    </>
   );
 }

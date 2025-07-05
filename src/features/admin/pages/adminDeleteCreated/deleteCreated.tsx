@@ -4,6 +4,7 @@ import { db } from "@lib/firebase";
 import type { Created } from "@entities/created";
 import CustomCard from "@components/CustomCard";
 import styles from "./deleteCreated.module.css";
+import AppBarAdmin from "@components/AppBbarAdmin";
 
 export default function DeleteCreated() {
   const [items, setItems] = useState<Created[]>([]);
@@ -31,6 +32,8 @@ export default function DeleteCreated() {
   if (loading) return <p>Chargement...</p>;
 
   return (
+    <>
+    <AppBarAdmin />
     <div>
       <h1>Supprimer une création</h1>
       {items.length === 0 ? (
@@ -50,5 +53,6 @@ export default function DeleteCreated() {
         </div>
       )}
     </div>
+    </>
   );
 }

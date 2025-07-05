@@ -20,7 +20,7 @@ export function AvisClientsList() {
                     avisList.push({
                         id: doc.id,
                         name: data.name,
-                        commentaire: data.message || data.commentaire,
+                        message: data.message || data.commentaire,
                         date: data.date?.toDate() || new Date()
                     });
                 });
@@ -40,7 +40,5 @@ export function AvisClientsList() {
         return _jsx("div", { className: "text-center py-8", children: "Chargement des avis..." });
     if (error)
         return _jsx("div", { className: "text-center py-8 text-red-500", children: error });
-    if (avisClients.length === 0)
-        return _jsx("div", { className: "text-center py-8", children: "Aucun avis pour le moment." });
-    return (_jsxs("div", { className: "max-w-3xl mx-auto px-4 py-8", children: [_jsx("h1", { className: "mb-5 mt-5", children: "T\u00E9moignages clients" }), _jsx(Carousel, { indicators: false, interval: 6000, className: "mb-5", prevIcon: _jsx("span", { className: styles.customchevron, children: "\u2039" }), nextIcon: _jsx("span", { className: styles.customchevron, children: "\u203A" }), children: avisClients.map(({ id, name, commentaire, date }) => (_jsx(Carousel.Item, { children: _jsxs("div", { className: "p-4 bg-with shadow rounded mx-auto mt-5 mb-5", style: { maxWidth: "600px" }, children: [_jsx("small", { className: "text-muted text-center", children: date.toLocaleDateString("fr-FR") }), _jsx("h5", { className: "mb-1 text-center", children: name }), _jsxs("p", { className: "mt-4 fst-italic", children: ["\"", commentaire, "\""] })] }) }, id))) }), _jsx("div", { className: styles.button, children: _jsx(Button, { label: "Je laisse un avis", redirectTo: "/addavisClient" }) })] }));
+    return (_jsxs("div", { className: "max-w-3xl mx-auto px-4 py-8", children: [_jsx("h1", { className: "mb-5 mt-5", children: "T\u00E9moignages clients" }), avisClients.length === 0 ? (_jsx("div", { className: "text-center py-8", children: "Aucun avis pour le moment." })) : (_jsx(Carousel, { indicators: false, interval: 6000, className: "mb-5", prevIcon: _jsx("span", { className: styles.customchevron, children: "\u2039" }), nextIcon: _jsx("span", { className: styles.customchevron, children: "\u203A" }), children: avisClients.map(({ id, name, message, date }) => (_jsx(Carousel.Item, { children: _jsxs("div", { className: "p-4 bg-with shadow rounded mx-auto mt-5 mb-5", style: { maxWidth: "600px" }, children: [_jsx("small", { className: "text-muted text-center", children: date.toLocaleDateString("fr-FR") }), _jsx("h5", { className: "mb-1 text-center", children: name }), _jsxs("p", { className: "mt-4 fst-italic", children: ["\"", message, "\""] })] }) }, id))) })), _jsx("div", { className: styles.button, children: _jsx(Button, { label: "Je laisse un avis", redirectTo: "/addavisClient" }) })] }));
 }

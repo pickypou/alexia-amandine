@@ -1,4 +1,4 @@
-import type { AvisClients } from "@entities/avisClients";
+import type { AvisClient } from "@entities/avisClient";
 import {
   collection,
   addDoc,
@@ -15,7 +15,7 @@ import type { AvisClientsRepository } from "@repositories/AvisClientsRepository"
 export class AvisClientsRepositoryImpl implements AvisClientsRepository {
   private collectionRef = collection(db, "avis_clients");
 
-  async getAllAvisClients(): Promise<AvisClients[]> {
+  async getAllAvisClients(): Promise<AvisClient[]> {
     const snapshot = await getDocs(this.collectionRef);
     return snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
@@ -28,7 +28,7 @@ export class AvisClientsRepositoryImpl implements AvisClientsRepository {
     });
   }
 
-  async addAvisClients(avis: AvisClients): Promise<AvisClients | null> {
+  async addAvisClients(avis: AvisClient): Promise<AvisClient | null> {
     try {
       const docRef = await addDoc(this.collectionRef, {
         nom: avis.name,
@@ -53,7 +53,7 @@ export class AvisClientsRepositoryImpl implements AvisClientsRepository {
     }
   }
 
-  async avisClientsGetById(id: string): Promise<AvisClients | null> {
+  async avisClientsGetById(id: string): Promise<AvisClient | null> {
     try {
       const docSnap = await getDoc(doc(this.collectionRef, id));
       const data = docSnap.data();

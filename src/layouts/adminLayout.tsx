@@ -4,9 +4,9 @@ import { Outlet } from 'react-router-dom';
 
 const AdminLayout = () => {
   return (
-    <div>
+    <div className="app-container">
     
-      <main>
+      <main className="main-content">
         <Outlet />
       </main>
      <Footer />

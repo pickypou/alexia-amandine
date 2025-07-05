@@ -1,3 +1,18 @@
 .avisform {
     text-align: center;
 }
+
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+  padding: 0 1rem; 
+}
+
+.buttonContainer button {
+  max-width:300px;
+  width: 100%;
+ 
+}

@@ -5,13 +5,13 @@ import { db } from "@lib/firebase";
 import styles from './avisClientsList.module.css'
 import { Carousel } from "react-bootstrap";
 
-
 export interface AvisClient {
   id: string;
   name: string;
-  commentaire: string;
+  message: string;
   date: Date;
 }
+
 
 export function AvisClientsList() {
   const [avisClients, setAvisClients] = useState<AvisClient[]>([]);
@@ -34,7 +34,7 @@ export function AvisClientsList() {
           avisList.push({
             id: doc.id,
             name: data.name,
-            commentaire: data.message || data.commentaire,
+            message: data.message || data.commentaire,
             date: data.date?.toDate() || new Date()
           });
         });
@@ -53,35 +53,41 @@ export function AvisClientsList() {
 
   if (loading) return <div className="text-center py-8">Chargement des avis...</div>;
   if (error) return <div className="text-center py-8 text-red-500">{error}</div>;
-  if (avisClients.length === 0) return <div className="text-center py-8">Aucun avis pour le moment.</div>;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
-  <h1 className="mb-5 mt-5">Témoignages clients</h1>
+      <h1 className="mb-5 mt-5">Témoignages clients</h1>
 
-   <Carousel indicators={false} interval={6000}  className="mb-5"
-    prevIcon={<span className={styles.customchevron}>‹</span>}
-  nextIcon={<span className={styles.customchevron}>›</span>}>
-        {avisClients.map(({ id, name, commentaire, date }) => (
-          <Carousel.Item key={id}>
-            <div className="p-4 bg-with shadow rounded mx-auto mt-5 mb-5" style={{ maxWidth: "600px" }}>
-                <small className="text-muted text-center">{date.toLocaleDateString("fr-FR")}</small>
-              <h5 className="mb-1 text-center">{name}</h5>
-              <p className="mt-4 fst-italic">"{commentaire}"</p>
-            </div>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      {avisClients.length === 0 ? (
+        <div className="text-center py-8">Aucun avis pour le moment.</div>
+      ) : (
+        <Carousel
+          indicators={false}
+          interval={6000}
+          className="mb-5"
+          prevIcon={<span className={styles.customchevron}>‹</span>}
+          nextIcon={<span className={styles.customchevron}>›</span>}
+        >
+          {avisClients.map(({ id, name, message, date }) => (
+            <Carousel.Item key={id}>
+              <div
+                className="p-4 bg-with shadow rounded mx-auto mt-5 mb-5"
+                style={{ maxWidth: "600px" }}
+              >
+                <small className="text-muted text-center">
+                  {date.toLocaleDateString("fr-FR")}
+                </small>
+                <h5 className="mb-1 text-center">{name}</h5>
+                <p className="mt-4 fst-italic">"{message}"</p>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      )}
 
-  <div className={styles.button} >
-    <Button label={"Je laisse un avis"}
-    redirectTo="/addavisClient"
-    />
-  </div>
-  </div>
- 
-
+      <div className={styles.button}>
+        <Button label={"Je laisse un avis"} redirectTo="/addavisClient" />
+      </div>
+    </div>
   );
 }
-
-

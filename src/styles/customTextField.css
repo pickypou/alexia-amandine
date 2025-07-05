@@ -1,7 +1,5 @@
 
-.custom-text-field{
-  margin-bottom: 1rem;
-}
+
 .custom-text-field label {
   display: block;
   margin-bottom: 0.25rem;
@@ -12,14 +10,16 @@
 }
 
 .custom-text-field input {
-  width: 60%;
+ width: 60%;
+ width: 100%;
   padding: 8px 12px;
   font-size: var(--text-md);
   border: 2px solid var(--color-on-primary);
   border-radius: 50px;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   background-color: transparent;
 }
+
 
 .custom-text-field input:focus {
   outline: none;

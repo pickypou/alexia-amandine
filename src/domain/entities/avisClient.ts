@@ -1,5 +1,5 @@
 
-export interface AvisClients {
+export interface AvisClient {
     id: string;
     name: string;
     message: string;

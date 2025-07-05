@@ -1,4 +1,4 @@
-import type { AvisClients } from "@entities/avisClients";
+import type { AvisClient } from "@entities/avisClient";
 import type { AvisClientsRepository } from "@repositories/AvisClientsRepository";
 import { AddAvisClientsUseCase } from "@usecases/avis_clients/addAvisClientsUseCase";
 import { DeleteAvisClientsUseCase } from "@usecases/avis_clients/DeleteAvisClientsUseCase";
@@ -20,17 +20,17 @@ export class AvisClientsInteractor {
   }
 
   // Ajout d’un avis client
-  async addAvisClient(avis: AvisClients): Promise<AvisClients | null> {
+  async addAvisClient(avis: AvisClient): Promise<AvisClient | null> {
     return this.addAvisClientUseCase.execute(avis);
   }
 
   // Récupérer tous les avis clients
-  async getAllAvisClients(): Promise<AvisClients[]> {
+  async getAllAvisClients(): Promise<AvisClient[]> {
     return this.getAllAvisClientsUseCase.execute();
   }
 
   // Récupérer un avis client par ID
-  async getAvisClientById(id: string): Promise<AvisClients | null> {
+  async getAvisClientById(id: string): Promise<AvisClient | null> {
     return this.getAvisClientByIdUseCase.execute(id);
   }
 

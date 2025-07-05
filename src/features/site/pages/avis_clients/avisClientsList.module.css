@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   bottom: 2rem;
+  margin-top: 2rem;
 }
 .carousel-control-prev-icon,
 .carousel-control-next-icon {

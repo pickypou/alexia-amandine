@@ -12,14 +12,14 @@
 .desktop-nav {
   display: flex;
   gap: 1.5rem;
-  align-items: center;
+  align-items: start;
 }
 
 /* Navigation mobile */
 .mobile-nav {
   display: none;
-  justify-content: space-between;
-  align-items: center;
+  justify-content:start;
+  align-items:start
 }
 
 .hamburger {
@@ -108,6 +108,9 @@
   
   .mobile-nav {
     display: flex;
+    justify-self: start;
+    
+    
   }
 
   .dropdown-content {

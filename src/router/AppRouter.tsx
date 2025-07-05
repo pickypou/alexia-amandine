@@ -8,10 +8,11 @@ import AdminLayout from "@layouts/adminLayout";
 import Account from "@admin/pages/acount/account";
 import CreatedListPage from '@pages/createdPage/CreatedListPage';
 import AddCreated from "@admin/pages/adminAddCreated/addCreated";
-import DeleteCreated from "@admin/pages/admin/adminDeleteCreated/deleteCreated";
 import ContactPage from "@pages/contactPage/contactPage";
 import { AddAvisClient } from "@pages/avis_clients/addAvisClients";
 import { AvisClientsList } from "@pages/avis_clients/avisClientsList";
+import DeleteAvisClients from "@admin/pages/adminDeleteAvisClients/AdminDeleteAvisClients";
+import DeleteCreated from "@admin/pages/adminDeleteCreated/deleteCreated";
 
 
 export const router = createBrowserRouter([
@@ -43,7 +44,8 @@ export const router = createBrowserRouter([
       { path: "login", element: <Login /> }, 
       { path: "account", element: <Account /> },
       { path: "addCreated", element: <AddCreated /> },
-      { path: "deleteCreated", element: <DeleteCreated /> }
+      { path: "deleteCreated", element: <DeleteCreated /> },
+      { path: "deleteAvis", element: <DeleteAvisClients />}
     ]
   }
 ]);

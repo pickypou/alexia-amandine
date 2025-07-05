@@ -1,8 +1,7 @@
 .footer {
   background-color: var(--color-primary);
   margin-top: 3rem;
-  position: fixed;
-  bottom: 0;
+
   width: 100%;
   
   padding: 0.5rem ;

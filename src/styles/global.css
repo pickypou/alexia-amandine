@@ -8,6 +8,8 @@
   src: url('../assets/fonts/Amable.ttf') format('truetype');
 }
 
+
+
 :root {
   --color-primary: #B7B1F2;
   --color-on-primary: #FDB7EA;
@@ -20,12 +22,34 @@
   --font-title: 'Autography';
   --font-text: 'Amable';
 
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-md: 1.1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 3.5rem;
+  --text-xs: clamp(0.65rem, 1.5vw, 0.75rem);
+--text-sm: clamp(0.75rem, 1.8vw, 0.875rem);
+--text-md: clamp(1rem, 2.2vw, 1.1rem);
+--text-lg: clamp(1.1rem, 2.8vw, 1.25rem);
+--text-xl: clamp(2.2rem, 6vw, 3.5rem);
+
 }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+   display: flex;
+  flex-direction: column;
+}
+
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
 
 h1,
 h2 {
@@ -49,9 +73,7 @@ p {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
-  font-family: var(--font-text);
-  color: var(--color-surface);
+  font-family: var(--font-text)
 }
 .center-screen {
   margin-top: 0;
@@ -61,4 +83,22 @@ body {
   align-items: center;
   height: 100vh;
 }
+
+/*body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  height: 90vh;
+  background-image: url("/images/logo.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  opacity: 0.05;
+  z-index: -1;
+  pointer-events: none;
+}*/
+
+
 

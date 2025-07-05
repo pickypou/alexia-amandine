@@ -18,7 +18,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   const inputId = inputProps.name || "file-" + Math.random().toString(36).slice(2, 8);
 
   return (
-    <div className={`custom-text-field ${className ?? ""}`}>
+    <div className={`custom-text-field ${className ??  ""}`}>
       {label && <label htmlFor={inputId}>{label}</label>}
 
       {isFileInput ? (

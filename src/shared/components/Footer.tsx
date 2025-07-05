@@ -7,7 +7,7 @@ export default function Footer() {
       <Link to="/admin">
   <img src="images/logo.jpg" className="img-footer" />
 </Link>
-      © {new Date().getFullYear()} Féerique & pétillante tout drois réservé
+      © {new Date().getFullYear()} Féerique & pétillante tout drois réservés
      <a href='https://ludovicspysschaert.fr/'>Création Ludovic SPYSSCHAERT</a>
     </footer>
   );

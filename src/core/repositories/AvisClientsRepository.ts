@@ -1,9 +1,9 @@
-import type { AvisClients } from "@entities/avisClients";
+import type { AvisClient } from "@entities/avisClient";
 
 
 export interface AvisClientsRepository {
-    getAllAvisClients(): Promise<AvisClients[]>;
-    addAvisClients(avisClients: AvisClients): Promise<AvisClients | null>;
-    avisClientsGetById(id: string): Promise<AvisClients | null>;
+    getAllAvisClients(): Promise<AvisClient[]>;
+    addAvisClients(avisClients: AvisClient): Promise<AvisClient | null>;
+    avisClientsGetById(id: string): Promise<AvisClient | null>;
     delete(id: string): Promise<boolean>;
 }
