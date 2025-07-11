@@ -13,6 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -25,6 +26,6 @@ const Login = () => {
             setError('Erreur de connexion, veuillez vérifier vos identifiants.');
         }
     };
-    return (_jsxs(_Fragment, { children: [_jsx("h1", { className: 'mt-5 mb-5', children: "Connexion" }), _jsx("div", { className: styles.container, children: _jsx("div", { children: _jsxs("form", { onSubmit: handleLogin, children: [_jsx(CustomTextField, { label: "Email", type: "email", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx(CustomTextField, { label: "Mot de passe", type: "password", value: password, onChange: (e) => setPassword(e.target.value), required: true }), _jsxs("div", { className: "button-container", children: [_jsx(Button, { type: "submit", label: "Se connecter" }), _jsx(Button, { type: "default", label: "Retour sur le site", redirectTo: "/" })] }), error && _jsx("p", { className: styles.error, children: error })] }) }) })] }));
+    return (_jsxs(_Fragment, { children: [_jsx("h1", { className: 'mt-5 mb-5', children: "Connexion" }), _jsx("div", { className: styles.container, children: _jsx("div", { children: _jsxs("form", { onSubmit: handleLogin, children: [_jsx(CustomTextField, { label: "Email", type: "email", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx(CustomTextField, { label: "Mot de passe", type: showPassword ? "text" : "password", value: password, onChange: (e) => setPassword(e.target.value), required: true, suffix: _jsx("span", { onClick: () => setShowPassword((prev) => !prev), children: showPassword ? "🙈" : "👁️" }) }), _jsxs("div", { className: "button-container", children: [_jsx(Button, { type: "submit", label: "Se connecter" }), _jsx(Button, { type: "default", label: "Retour sur le site", redirectTo: "/" })] }), error && _jsx("p", { className: styles.error, children: error })] }) }) })] }));
 };
 export default Login;

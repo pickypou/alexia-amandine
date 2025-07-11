@@ -14,6 +14,8 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,13 +43,19 @@ const Login: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <CustomTextField
-            label="Mot de passe"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+       <CustomTextField
+  label="Mot de passe"
+  type={showPassword ? "text" : "password"}
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  required
+  suffix={
+    <span onClick={() => setShowPassword((prev) => !prev)}>
+      {showPassword ? "🙈" : "👁️"}
+    </span>
+  }
+/>
+
           <div className ="button-container">
           <Button type="submit" label="Se connecter" />
           <Button type="default" label="Retour sur le site" redirectTo="/" />

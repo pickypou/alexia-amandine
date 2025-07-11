@@ -12,7 +12,7 @@ const collections = ["couture", "papier", "crochet", "personnalisable"];
 const categoriesByCollection = {
     couture: ["sac", "trousse/pochettes", "accessoires", "divers"],
     papier: ["emballage", "decoration", "accessoires", "divers", "fête/événement"],
-    crochet: ["peluches", "poupées", "composition-florales", "accessoires", "sacs à mains"],
+    crochet: ["peluches", "poupées", "composition-florales", "sacs à mains", " couverture C2C"],
     personnalisable: ["sac", "trousse", "Textile", "Adhéssif", "Tasse/gobelets", "Accéssoire", "fête/événements"]
 };
 export default function AddCreated() {
