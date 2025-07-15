@@ -7,7 +7,7 @@ import type { GetByIdUseCase } from "@usecases/createdUseCase/getByIdUseCase";
 import type { updateUseCase } from "@usecases/createdUseCase/updateCoutureUseCase";
 
 
-export class CoutureInteractor {
+export class CreatedInteractor {
   constructor(
     private readonly getAllUseCase: GetAllUseCase, 
     private readonly getByIdUseCase: GetByIdUseCase, 
@@ -40,7 +40,7 @@ async getById(id: string): Promise<Created | null> { // Replace 'Couture | null'
     if (created.price < 0) {
       throw new Error("Created price must be a positive number");
     }
-    if (created.customizable === undefined) {
+    if (created.custom === undefined) {
       throw new Error("Created customizable field is required");
     }
     if (created.imageUrl && !(typeof created.imageUrl === "string" || created.imageUrl instanceof File)) {

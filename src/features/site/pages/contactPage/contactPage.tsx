@@ -81,7 +81,7 @@ export default function ContactPage() {
       </a>
       <br />
     
-      <a href="https://www.facebook.com/groups/462713585345293/?ref=share" target="_blank" rel="noreferrer">
+      <a href="https://www.facebook.com/share/14FBg5SgbzH/" target="_blank" rel="noreferrer">
         <img src="images/facebook.png" alt="logo facebook"  className={styles.img} />
       </a>
       <br />

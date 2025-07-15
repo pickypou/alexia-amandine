@@ -18,8 +18,8 @@ export default function AppBar() {
             name: "couture",
             links: [
                 ["/couture/sac", "Sacs"],
-                ["/couture/trousse", "Trousses/pochettes"],
-                ["/couture/accessoires", "Accessoires"],
+                ["/couture/trousse-pochette", "Trousses & Pochettes"],
+                ["/couture/accessoire", "Accessoires"],
                 ["/couture/divers", "Divers"]
             ]
         },
@@ -30,29 +30,30 @@ export default function AppBar() {
                 ["/papier/decoration", "Décoration"],
                 ["/papier/accessoires", "Accessoires"],
                 ["/papier/divers", "Divers"],
-                ["/papier/fetes", "Fêtes/événements"]
+                ["/papier/fete-evenement", "Fêtes & événements"]
             ]
         },
         {
             name: "crochet",
             links: [
-                ["/crochet/sacs", "Sacs"],
-                ["/crochet/peluches", "Peluches"],
-                ["/crochet/poupees", "Poupées"],
-                ["/crochet/Compositions-florales", "Compositions florales"],
-                ["/crochet/couvertures", "Couvertures C2C"]
+                ["/crochet/sac", "Sacs"],
+                ["/crochet/peluche", "Peluches"],
+                ["/crochet/poupee", "Poupées"],
+                ["/crochet/Composition-florale", "Compositions florales"],
+                ["/crochet/couverture", "Couvertures C2C"],
+                ["/crochet/accessoire", "Accessoires"]
             ]
         },
         {
             name: "personnalisable",
             links: [
                 ["/personnalisable/sac", "Sacs"],
-                ["/personnalisable/trousses", "Trousses"],
-                ["/personnalisable/textiles", "Textiles"],
-                ["/personnalisable/Adhesif", "Adhésifs"],
-                ["/personnalisable/tasses", "Tasses/Gobelets"],
-                ["/personnalisable/fetes", "Fêtes/événements"],
-                ["/personnalisable/accessoires", "Accessoires"]
+                ["/personnalisable/trousse", "Trousses"],
+                ["/personnalisable/textile", "Textiles"],
+                ["/personnalisable/adhesif", "Adhésifs"],
+                ["/personnalisable/tasse-gobelet", "Tasses & Gobelets"],
+                ["/personnalisable/fete-evenement", "Fêtes & événements"],
+                ["/personnalisable/accessoire", "Accessoires"]
             ]
         }
     ];

@@ -8,12 +8,17 @@ import styles from './addCreated.module.css'
 import CustomTextarea from "@components/CustomTextarea";
 import AppBarAdmin from "@components/AppBbarAdmin";
 
+function normalize(str: string): string {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+
 const collections = ["couture", "papier", "crochet", "personnalisable"];
 const categoriesByCollection: Record<string, string[]> = {
-  couture: ["sac", "trousse/pochettes","accessoires", "divers"],
-  papier: ["emballage", "decoration", "accessoires", "divers", "fête/événement"],
-  crochet: ["peluches", "poupées","composition-florales", "sacs à mains"," couverture C2C"],
-  personnalisable : ["sac", "trousse","Textile", "Adhéssif", "Tasse/gobelets", "Accéssoire", "fête/événements"]
+  couture: ["sac", "trousse-pochette","accessoire", "divers"],
+  papier: ["emballage", "decoration", "accessoire", "divers", "fete-evenement"],
+  crochet: ["peluche", "poupee","composition-florale", "accessoire", "sac à main"," couverture C2C"],
+  personnalisable : ["sac", "trousse","textile", "adhéssif", "tasse-gobelet", "accessoire", "fete-evenement"]
   
 };
 
@@ -23,13 +28,13 @@ export default function AddCreated() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [custom, setCustom] = useState(false);
+  const [customizable, setCustomizable] = useState(false);
   const [file, setFile] = useState<File | null>(null);
 
   // Activation automatique du champ custom si on choisit "personnalisable"
   useEffect(() => {
     if (collectionName === "personnalisable") {
-      setCustom(true);
+      setCustomizable(true);
     }
   }, [collectionName]);
 
@@ -47,16 +52,17 @@ export default function AddCreated() {
     const snapshot = await uploadBytes(storageRef, file);
     const imageUrl = await getDownloadURL(snapshot.ref);
 
-    await addDoc(collection(db, "created"), {
-      collection: collectionName,
-      category,
-      name,
-      description,
-      price,
-      custom: collectionName === "personnalisable" ? true : custom,
-      imageUrl,
-      createdAt: new Date().toISOString(),
-    });
+   await addDoc(collection(db, "created"), {
+  collection: normalize(collectionName),
+  category: normalize(category),
+  name,
+  description,
+  price,
+  customizable: collectionName === "personnalisable" ? true : customizable,
+  imageUrl,
+  createdAt: new Date().toISOString(),
+});
+
 
     alert("Création ajoutée !");
     // Reset formulaire
@@ -65,7 +71,7 @@ export default function AddCreated() {
     setPrice("");
     setFile(null);
     setCategory(categoriesByCollection[collectionName][0]);
-    if (collectionName !== "personnalisable") setCustom(false);
+    if (collectionName !== "personnalisable") setCustomizable(false);
   } catch (error) {
     console.error("Erreur lors de l'ajout :", error);
     alert("Erreur lors de l'ajout, veuillez réessayer.");
@@ -128,8 +134,8 @@ export default function AddCreated() {
         <label>
           <input
             type="checkbox"
-            checked={custom}
-            onChange={(e) => setCustom(e.target.checked)}
+            checked={customizable}
+            onChange={(e) => setCustomizable(e.target.checked)}
           />
           Personnalisable
         </label>

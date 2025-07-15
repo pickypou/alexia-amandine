@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, getDoc, setDoc, deleteDoc,query, where } from "firebase/firestore";
 import type { Created } from '@entities/created';
 import type { CreatedRepository } from '@repositories/CreatedRepository';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -8,14 +8,80 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export class CreatedRepositoryImpl implements CreatedRepository {
 
-  async getAll(): Promise<Created[]> {
-    const firestore = getFirestore();
-    const querySnapshot = await getDocs(collection(firestore, "created"));
-    return querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Created[];
+ async getAll(filters?: { collection?: string; category?: string; customizable?: boolean }): Promise<Created[]> {
+  const firestore = getFirestore();
+  const collectionRef = collection(firestore, "created");
+
+  const constraints = [];
+  if (filters) {
+    if (filters.collection && filters.collection.trim() !== '') {
+      constraints.push(where("collection", "==", filters.collection));
+      console.log("Collection filter applied:", filters.collection);
+    }
+    if (filters.category && filters.category.trim() !== '') {
+      constraints.push(where("category", "==", filters.category));
+      console.log("Category filter applied:", filters.category);
+    }
+    if (filters.customizable !== undefined) {
+  constraints.push(where("customizable", "==", filters.customizable));
+  console.log("Customizable filter applied:", filters.customizable);
+}
   }
+
+  let queryRef;
+  if (constraints.length > 0) {
+    queryRef = query(collectionRef, ...constraints);
+  } else {
+    queryRef = collectionRef;
+  }
+
+  const querySnapshot = await getDocs(queryRef);
+  return querySnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as Created[];
+}
+
+async getCustomProducts(category?: string): Promise<Created[]> {
+  const firestore = getFirestore();
+  const collectionRef = collection(firestore, "created");
+
+  // Requête 1 : produits dans la collection "personnalisable" qui NE sont PAS des produits custom
+  const query1 = query(
+    collectionRef,
+    where("collection", "==", "personnalisable"),
+    where("customizable", "==", false),
+    ...(category ? [where("category", "==", category)] : [])
+  );
+  console.log("getCustomProducts called with category:", category);
+
+
+  // Requête 2 : produits de n'importe quelle autre collection, mais avec customizable === true
+  const query2 = query(
+    collectionRef,
+    where("customizable", "==", true),
+    ...(category ? [where("category", "==", category)] : [])
+  );
+
+  // On exécute les 2 requêtes en parallèle
+  const [snap1, snap2] = await Promise.all([getDocs(query1), getDocs(query2)]);
+
+  const results1 = snap1.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Created[];
+  const results2 = snap2.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Created[];
+
+  // On filtre pour éviter les doublons (ex : un produit marqué customizable === true ET dans "personnalisable")
+  const combined = [...results1, ...results2];
+  const unique = Array.from(new Map(combined.map(item => [item.id, item])).values());
+
+console.log("Results query1:", results1);
+console.log("Results query2:", results2);
+console.log("Combined unique results:", unique);
+
+  return unique;
+}
+
+
+
 
   async add(created: Created): Promise<boolean> {
   const firestore = getFirestore();
@@ -32,13 +98,15 @@ export class CreatedRepositoryImpl implements CreatedRepository {
     }
 
     const docRef = doc(collection(firestore, "created")); // Auto-ID
-    await setDoc(docRef, {
-      name: created.name,
-      description: created.description,
-      price: created.price,
-      customizable: created.customizable,
-      imageUrl: imageUrl,
-    });
+  await setDoc(docRef, {
+  name: created.name,
+  description: created.description,
+  price: created.price,
+  custom: created.custom,      // ici custom (ou customizable) selon choix
+  imageUrl: imageUrl,
+  collection: created.collection,
+  category: created.category,
+});
 
     return true;
   } catch (error) {

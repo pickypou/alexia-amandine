@@ -5,6 +5,7 @@ import { db } from "@lib/firebase";
 import CustomCard from "@components/CustomCard";
 import styles from "./deleteCreated.module.css";
 import AppBarAdmin from "@components/AppBbarAdmin";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 export default function DeleteCreated() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -23,8 +24,32 @@ export default function DeleteCreated() {
     const handleDelete = async (id) => {
         if (!window.confirm("Voulez-vous vraiment supprimer cet élément ?"))
             return;
-        await deleteDoc(doc(db, "created", id));
-        setItems((prev) => prev.filter((item) => item.id !== id));
+        // Trouver l'élément à supprimer pour récupérer l'URL de l'image
+        const itemToDelete = items.find(item => item.id === id);
+        if (!itemToDelete)
+            return;
+        try {
+            // Supprimer l'image de Firebase Storage
+            if (typeof itemToDelete.imageUrl === "string" && itemToDelete.imageUrl) {
+                const storage = getStorage();
+                // Extraire le chemin relatif à partir de l’URL Firebase Storage
+                const decodedUrl = decodeURIComponent(itemToDelete.imageUrl);
+                const pathMatch = decodedUrl.match(/\/o\/(.+)\?alt=/);
+                const filePath = pathMatch?.[1];
+                if (filePath) {
+                    const imageRef = ref(storage, filePath);
+                    await deleteObject(imageRef);
+                    console.log("Image supprimée du storage :", filePath);
+                }
+            }
+            // Supprimer le document Firestore
+            await deleteDoc(doc(db, "created", id));
+            setItems((prev) => prev.filter((item) => item.id !== id));
+        }
+        catch (error) {
+            console.error("Erreur lors de la suppression :", error);
+            alert("Erreur lors de la suppression de l'élément.");
+        }
     };
     if (loading)
         return _jsx("p", { children: "Chargement..." });
