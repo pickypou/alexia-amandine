@@ -57,7 +57,7 @@ export default function ContactPage() {
       <img src="images/logo-insta.png" alt="Logo insta" className={styles.img} />
     </a>
 
-    <a href="https://www.facebook.com/share/g/199FJie5Rj/" target="_blank" rel="noreferrer">
+    <a href="https://www.facebook.com/share/16fpJ7BJsa/" target="_blank" rel="noreferrer">
       <img src="images/facebook.png" alt="logo facebook"  className={styles.img}  />
     </a>
 

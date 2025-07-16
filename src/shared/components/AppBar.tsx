@@ -32,7 +32,7 @@ export default function AppBar() {
       links: [
         ["/papier/emballage", "Emballage"],
         ["/papier/decoration", "Décoration"],
-        ["/papier/accessoires", "Accessoires"],
+        ["/papier/accessoire", "Accessoires"],
         ["/papier/divers", "Divers"],
         ["/papier/fete-evenement", "Fêtes & événements"]
       ]
@@ -40,11 +40,11 @@ export default function AppBar() {
     {
       name: "crochet",
       links: [
-        ["/crochet/sac", "Sacs"],
+        ["/crochet/sac-a-main", "Sacs"],
         ["/crochet/peluche", "Peluches"],
         ["/crochet/poupee", "Poupées"],
         ["/crochet/Composition-florale", "Compositions florales"],
-        ["/crochet/couverture", "Couvertures C2C"],
+        ["/crochet/couverture-c2c", "Couvertures C2C"],
         ["/crochet/accessoire", "Accessoires"]
       ]
     },

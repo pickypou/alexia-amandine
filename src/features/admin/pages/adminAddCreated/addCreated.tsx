@@ -17,7 +17,7 @@ const collections = ["couture", "papier", "crochet", "personnalisable"];
 const categoriesByCollection: Record<string, string[]> = {
   couture: ["sac", "trousse-pochette","accessoire", "divers"],
   papier: ["emballage", "decoration", "accessoire", "divers", "fete-evenement"],
-  crochet: ["peluche", "poupee","composition-florale", "accessoire", "sac à main"," couverture C2C"],
+  crochet: ["peluche", "poupee","composition-florale", "accessoire", "sac-a-main","couverture-c2c"],
   personnalisable : ["sac", "trousse","textile", "adhéssif", "tasse-gobelet", "accessoire", "fete-evenement"]
   
 };
