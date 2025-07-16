@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, doc, getDoc, setDoc, deleteDoc,query, where } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, getDoc, setDoc, deleteDoc,query, where, orderBy } from "firebase/firestore";
 import type { Created } from '@entities/created';
 import type { CreatedRepository } from '@repositories/CreatedRepository';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -29,13 +29,14 @@ export class CreatedRepositoryImpl implements CreatedRepository {
   }
 
   let queryRef;
-  if (constraints.length > 0) {
-    queryRef = query(collectionRef, ...constraints);
-  } else {
-    queryRef = collectionRef;
-  }
+if (constraints.length > 0) {
+  queryRef = query(collectionRef, ...constraints, orderBy("name"));
+} else {
+  queryRef = query(collectionRef, orderBy("name"));
+}
 
   const querySnapshot = await getDocs(queryRef);
+  console.log("Nombre de documents récupérés:", querySnapshot.docs.length);
   return querySnapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data(),
@@ -48,20 +49,20 @@ async getCustomProducts(category?: string): Promise<Created[]> {
 
   // Requête 1 : produits dans la collection "personnalisable" qui NE sont PAS des produits custom
   const query1 = query(
-    collectionRef,
-    where("collection", "==", "personnalisable"),
-    where("customizable", "==", false),
-    ...(category ? [where("category", "==", category)] : [])
-  );
-  console.log("getCustomProducts called with category:", category);
+  collectionRef,
+  where("collection", "==", "personnalisable"),
+  where("customizable", "==", false),
+  ...(category ? [where("category", "==", category)] : []),
+  orderBy("name", "asc")
+);
 
+const query2 = query(
+  collectionRef,
+  where("customizable", "==", true),
+  ...(category ? [where("category", "==", category)] : []),
+  orderBy("name", "asc")
+);
 
-  // Requête 2 : produits de n'importe quelle autre collection, mais avec customizable === true
-  const query2 = query(
-    collectionRef,
-    where("customizable", "==", true),
-    ...(category ? [where("category", "==", category)] : [])
-  );
 
   // On exécute les 2 requêtes en parallèle
   const [snap1, snap2] = await Promise.all([getDocs(query1), getDocs(query2)]);

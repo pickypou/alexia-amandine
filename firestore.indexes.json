@@ -1,13 +1,13 @@
 {
   "indexes": [
     {
-      "collectionGroup": "couture",
+      "collectionGroup": "created",
       "queryScope": "COLLECTION",
       "fields": [
-        {
-          "fieldPath": "Field",
-          "order": "ASCENDING"
-        }
+         { "fieldPath": "collection", "order": "ASCENDING" },
+  { "fieldPath": "category", "order": "ASCENDING" },
+  { "fieldPath": "customizable", "order": "ASCENDING" },
+  { "fieldPath": "name", "order": "ASCENDING" }
       ]
     }
   ],
